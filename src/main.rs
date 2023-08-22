@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 mod camera;
 mod map;
 mod map_builder;
