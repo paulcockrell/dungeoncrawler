@@ -1,7 +1,11 @@
 use crate::prelude::*;
 
+use self::prefab::apply_prefab;
+
 mod automata;
+mod drunkard;
 mod empty;
+mod prefab;
 mod rooms;
 
 trait MapArchitect {
@@ -20,8 +24,15 @@ pub struct MapBuilder {
 
 impl MapBuilder {
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect = automata::Architect {};
-        architect.new(rng)
+        let mut architect: Box<dyn MapArchitect> = match rng.range(0, 3) {
+            0 => Box::new(drunkard::Architect {}),
+            1 => Box::new(rooms::Architect {}),
+            _ => Box::new(automata::Architect {}),
+        };
+
+        let mut mb = architect.new(rng);
+        apply_prefab(&mut mb, rng);
+        mb
     }
 
     fn fill(&mut self, tile: TileType) {
