@@ -54,6 +54,9 @@ pub struct ProvidesHealing {
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ProvidesDungeonMap;
 
+#[derive(Clone, PartialEq)]
+pub struct Carried(pub Entity);
+
 #[derive(Clone, Debug, PartialEq)]
 pub struct FieldOfView {
     pub visible_tiles: HashSet<Point>,
