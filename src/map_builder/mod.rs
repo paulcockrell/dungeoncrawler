@@ -7,12 +7,20 @@ mod drunkard;
 mod empty;
 mod prefab;
 mod rooms;
+mod themes;
+
+use themes::*;
+
+pub trait MapTheme: Sync + Send {
+    fn tile_to_render(&self, tile_type: TileType) -> FontCharType;
+}
 
 trait MapArchitect {
     fn new(&mut self, rng: &mut RandomNumberGenerator) -> MapBuilder;
 }
 
 const UNREACHABLE: &f32 = &f32::MAX;
+const NUM_ROOMS: usize = 20;
 
 pub struct MapBuilder {
     pub map: Map,
@@ -20,6 +28,7 @@ pub struct MapBuilder {
     pub monster_spawns: Vec<Point>,
     pub player_start: Point,
     pub amulet_start: Point,
+    pub theme: Box<dyn MapTheme>,
 }
 
 impl MapBuilder {
@@ -32,6 +41,12 @@ impl MapBuilder {
 
         let mut mb = architect.new(rng);
         apply_prefab(&mut mb, rng);
+
+        mb.theme = match rng.range(0, 2) {
+            0 => Dungeon::new(),
+            _ => Forest::new(),
+        };
+
         mb
     }
 
@@ -61,8 +76,6 @@ impl MapBuilder {
     }
 
     fn build_random_rooms(&mut self, rng: &mut RandomNumberGenerator) {
-        const NUM_ROOMS: usize = 20;
-
         while self.rooms.len() < NUM_ROOMS {
             let room = Rect::with_size(
                 rng.range(1, SCREEN_WIDTH - 10),
