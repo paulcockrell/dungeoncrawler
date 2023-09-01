@@ -57,6 +57,12 @@ pub struct ProvidesDungeonMap;
 #[derive(Clone, PartialEq)]
 pub struct Carried(pub Entity);
 
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ActivateItem {
+    pub used_by: Entity,
+    pub item: Entity,
+}
+
 #[derive(Clone, Debug, PartialEq)]
 pub struct FieldOfView {
     pub visible_tiles: HashSet<Point>,
