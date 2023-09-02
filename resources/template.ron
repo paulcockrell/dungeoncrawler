@@ -34,7 +34,7 @@ Templates(
     ),
     Template(
         entity_type: Item,
-        name: "Shiny sword (2 damage)",
+        name: "Shiny sword (3 damage)",
         glyph: 'S',
         levels: [1, 2],
         frequency: 1,
