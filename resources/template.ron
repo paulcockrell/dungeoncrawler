@@ -26,7 +26,7 @@ Templates(
     ),
     Template(
         entity_type: Item,
-        name: "Rusty sword (2 damage)",
+        name: "Rusty sword (+2 damage)",
         glyph: '/',
         levels: [0, 1, 2],
         frequency: 1,
@@ -34,7 +34,7 @@ Templates(
     ),
     Template(
         entity_type: Item,
-        name: "Shiny sword (3 damage)",
+        name: "Shiny sword (+3 damage)",
         glyph: 'S',
         levels: [1, 2],
         frequency: 1,
@@ -42,7 +42,7 @@ Templates(
     ),
     Template(
         entity_type: Item,
-        name: "Huge sword (4 damage)",
+        name: "Huge sword (+4 damage)",
         glyph: '/',
         levels: [2],
         frequency: 1,
