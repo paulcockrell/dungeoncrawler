@@ -25,5 +25,5 @@ cargo run
 
 ```
 cargo build --target wasm32-unknown-unknown --release
-wasm-bindgen target\wasm32-unknown-unknown\release\loot_tables.wasm --out-dir .\wasm_help --no-modules --no-typescript
+wasm-bindgen target/wasm32-unknown-unknown/release/dungeoncrawl.wasm --out-dir ./wasm_help --no-modules --no-typescript
 ```
